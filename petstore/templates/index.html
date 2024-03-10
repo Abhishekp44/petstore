@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="row mt-3 p-3">
+    <div class="col-md-3">
+        <h5>Filter by Category</h5>
+        <a href="/home">All</a><br>
+        <a href="/catfilter/1">male</a><br>
+        <a href="/catfilter/2">female</a><br>
+        <br>
+        <h5>Filter by Price</h5><br>
+        <form method="get" action="/pricefilter">
+          <div class="mb-2">
+            <label for="Input1" class="form-label">Min:</label>
+            <input type="text" class="form-control" id="Input1" name="min">
+          </div>
+          <div class="mb-2">
+            <label for="Input2" class="form-label">Max:</label>
+            <input type="text" class="form-control" id="Input2" name="max">
+          </div>
+          <div class="mb-2">
+            <input type="submit" class="btn btn-danger" value="Filter" >
+          </div>
+        </form>
+        <br>
+    </div><!--side bar end-->
+
+    <div class="col-md-9 p-3">
+      {% if errmsg %}
+        <div class="alert alert-danger">
+          {{errmsg}}
+        </div>
+      {% endif %}
+        <div class="row">
+          {% for x in data %}
+          <div class="col-md-3 mb-3">
+            <div class="card" style="width: 100%;">
+              <img src="{{x.image.url}}" class="card-img-top" height="200px">
+              <div class="card-body">
+                <h5 class="card-title">{{x.name}}</h5>
+                <p class="card-text">{{x.species}}</p>
+                <p class="card-text">{{x.breed}}</p>
+                <p class="card-text">{{x.price}}</p>
+                <a href="#" class="btn btn-primary">See Detail</a>
+              </div>
+            </div>
+          </div><!--Product 1--> 
+          {% endfor %}
+          
+ 
+        </div>
+    </div><!--product list end-->
+</div><!--2nd row end or main section end-->
+{% endblock 'main' %}
